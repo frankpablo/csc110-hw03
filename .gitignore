@@ -1,0 +1,8 @@
+# Pytest cache directory
+.pytest_cache/
+
+# macOS specific files
+.DS_Store
+
+# Python specific files
+__pycache__/
