@@ -28,7 +28,11 @@ def read_five_ints():
         # convert to int
         # check if the int is not in the interval [0 to 10] print error
         # add the int to grades at index idx
+
         pass
+
+    #Anything with this indentation is NO LONGER inside the loop
+
 
 # Task 2:
 #  Complete the function "pick_averaging_method" below:
