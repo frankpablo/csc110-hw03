@@ -1,17 +1,12 @@
 import pytest
-import hw03  # Import the module here
-import sys
+import hw03
 
-# Part 1
-# ===========
-def test_1_1_read_five_ints_one_not_int(capsys, monkeypatch):
-    # Create a list of input values
-    user_inputs = iter(["6","pizza", "", "", ""])
-    # monkeypatch.setattr('builtins.input', lambda _: next(inputs))
-    with monkeypatch.context() as m, pytest.raises(SystemExit) as e:
-        m.setattr('builtins.input', lambda _: next(user_inputs))
-        grades = [0,0,0,0,0] # initialized with five zeros
+
+@pytest.mark.parametrize("bad_input", ['pizza', '', '1.5', '-1', '1 0'])
+def test_1_1_read_five_ints_one_not_int(capsys, monkeypatch, bad_input):
+    user_inputs = iter(["6", bad_input])
+    monkeypatch.setattr("builtins.input", lambda _: next(user_inputs))
+    monkeypatch.setattr(hw03, "grades", [0, 0, 0, 0, 0])
+    with pytest.raises(SystemExit):
         hw03.read_five_ints()
-    captured = capsys.readouterr()
-    expected = "Error in read_five_ints: input string is not for an integer"
-    assert expected in captured.out, "Tip: Did you check the input value is an int?"
+    assert capsys.readouterr().out == 'Error in read_five_ints: input string is not for an integer' + "\n"

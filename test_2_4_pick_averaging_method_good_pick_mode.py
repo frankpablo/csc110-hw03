@@ -1,23 +1,17 @@
-import hw03  # Import the module here
-import sys
+import pytest
+import hw03
 
-# Part 2
-# ===========
+
 def test_2_4_pick_averaging_method_good_pick_mode(capsys, monkeypatch):
-    # Create a list of input values
-    user_inputs = iter(["c"])
-    try:
-        with monkeypatch.context() as m:
-            m.setattr('builtins.input', lambda _: next(user_inputs))
-            hw03.grades = [6, 6, 7, 8, 10]
-            hw03.pick_averaging_method()
-        captured = capsys.readouterr()
-        printout = ""
-        if captured.out == "":
-            printout = "<Nothing>"
-        expected = "picked: Mode"
-        hint = f"\n\n *** required printout must have: \n{expected}\n *** Your printout is\n{printout}"
-        assert expected in captured.out, hint
-    except SystemExit:
-        print("\n\n****\n Your Error: pick_averaging_method() raised exit unexpectedly!")
-        assert False
+    monkeypatch.setattr("builtins.input", lambda _: 'c')
+    monkeypatch.setattr(hw03, "grades", [6, 6, 7, 8, 10])
+    actual = hw03.pick_averaging_method()
+    assert actual == 6, "Return the calculated mode."
+    assert capsys.readouterr().out == "picked: Mode\n"
+
+
+def test_mode_tie_uses_first_encountered_value(capsys, monkeypatch):
+    monkeypatch.setattr("builtins.input", lambda _: "c")
+    monkeypatch.setattr(hw03, "grades", [6, 6, 7, 8, 8])
+    assert hw03.pick_averaging_method() == 6
+    assert capsys.readouterr().out == "picked: Mode\n"

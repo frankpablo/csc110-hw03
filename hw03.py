@@ -5,7 +5,7 @@ References: (anything you checked to solve this)
 """
 
 # imported modules
-import statistics # let's us use mean, median, mode
+import statistics # lets us use mean, median, mode
 
 # This is a global variable (seen by all local scopes)
 grades = [0,0,0,0,0] # initialized with five zeros

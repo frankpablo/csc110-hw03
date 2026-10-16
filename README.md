@@ -1,19 +1,15 @@
 
 # Homework Assignment 3: Conditionals
 
-**Due: Before Lecture 13b**
+**Due: As listed on course schedule**
 
 *Note: Homework Assignment 3 should be completed individually.*
 
 
 # Objective
-So far, we have trusted that the user will input the desired type of values when we request them to do so.
-
 The theme of this homework is a "grade" calculator.
 
-We will now do some basic input checking to see if the input that the user provided is adequate for the task. There will be a little bit about loops in this homework, but the template already contains the loop structure, so you only need to worry about the steps that are required for each loop iteration.
-
-
+So far, we have trusted that the user will input the desired type of values when we request them to do so. We will now do some basic input checking to see if the input that the user provided is adequate for the task. There will be a little bit about loops in this homework, but the template already contains the loop structure, so you only need to worry about the steps that are required for each loop iteration.
 
 For this homework you need to complete three tasks:
 
@@ -37,26 +33,25 @@ Annotated grades:
 The End
 ```
 
-You only need to complete the functions. The `main` is provided for you and it takes care of all the printouts except the error messages we require you to print (more on that below).
-In particular, it takes care of sorting the input grades and printing the desired formatted results. **We only care about detecting mistakes in the user input choices.**
+Complete the three functions described below. Your functions read and validate input, print the required messages, calculate and return the selected average, and call the appropriate visualization helper. The provided `main()` sorts the grades and coordinates these calls; the provided helpers format the results.
 
-The DocStrings below every function explain what they do. Do not remove them.
+Keep the existing docstrings in the three functions you implement, and add small but informative comments explaining your logic. Do not modify the provided helper functions or `main()`.
 
 # A Note on passing the tests
 
-Any tests are very strict with respect to the format of requested prompts and printouts so pay attention to exactly what is requested and replicate it as exactly as possible.
+Use the prompts specified below. The tests replace `input()` and do not check prompt text or echo user input. They check required output separately; its wording, capitalization, punctuation, spacing, and line breaks must match. Do not print extra messages. Quotation marks surrounding descriptions of output are not part of the required output.
 
 ## The global variable `grades`
 
-The list variable `grades` is declred at the top and outside any function. This makes it a member of the **global context** and visible to all functions.
+The list variable `grades` is declared at the top and outside any function. This makes it a member of the **global context** and visible to all functions.
 
   * This variable is initialized with 5 zeros inside.
-  * If you modify this list while inside any function, the global variable will be modified. However, you *need* to tell pythn that you intend to use the `global grades` so make sure you put that at the top of the function.
+  * Assigning to an element, such as `grades[idx] = num`, modifies the existing list and does not require `global grades`. A `global grades` declaration is needed only if you reassign the variable itself inside a function, such as `grades = [...]`.
   * You can overwrite a value at some index `idx` with the number `num` by using the command:
     ```
     grades[idx] = num
     ```
-  * remember that the only valid indices that you can use for the variable `grades` are 0 through 4 (because we only havea total of 5).
+  * remember that the only valid indices that you can use for the variable `grades` are 0 through 4 (because we only have a total of 5).
 
 ## Task 1: read_five_ints
 
@@ -74,7 +69,7 @@ in_str.isdigit()
 
 The steps to complete the function are detailed below:
 
-  1. Remove the `pass` keyword indside the provided for loop and fill it out with your code.
+  1. Remove the `pass` keyword inside the provided for loop and fill it out with your code.
   2. You should use the `input` function to read one number using the following prompt: `"Give me the next grade in [0 to 10]:"`; Note that whatever is read is a String.
   3. Check to see if the input is only digits. If it is not, print an error message with: `"Error in read_five_ints: input string is not for an integer"` and follow that with the statement `exit()`.
   4. If the string has only digits, cast the input string into an integer by using the `int` function.
@@ -93,7 +88,7 @@ Note that for the tests, we do not compare against the prompts and user input, o
 
 ### define the function
 
-The purpose of pick_averaging_method is to pick one of three standard averaging methods: mean, median, or mode. Mean is the standard arithmetic average we are used to, e.g. the mean of `[6,6,7,8,10]` is 7.4; median is the value at the center of the provided values if they are aranged in a sorted list, e.g. the median of `[6,6,7,8,10]` is 7, and the median of `[6,6,7,8]` is 6.5 (in the middle between 6 and 7); Lastly, the mode is the most repeated value, e.g. the mode of `[6,6,7,8,10]` is 6, and the mode of `[6,6,7,8,8]` is 6 (in case of a tie, it's the first one);
+The purpose of pick_averaging_method is to pick one of three standard averaging methods: mean, median, or mode. Mean is the standard arithmetic average we are used to, e.g. the mean of `[6,6,7,8,10]` is 7.4; median is the value at the center of the provided values if they are arranged in a sorted list, e.g. the median of `[6,6,7,8,10]` is 7, and the median of `[6,6,7,8]` is 6.5 (in the middle between 6 and 7); Lastly, the mode is the most repeated value, e.g. the mode of `[6,6,7,8,10]` is 6, and the mode of `[6,6,7,8,8]` is 6 (in case of a tie, it's the first one);
 
 
 You need to do the following:
@@ -114,7 +109,7 @@ You need to do the following:
         ```
         picked: Median
         ```
-        then calculate the mean by using the command:
+        then calculate the median by using the command:
         ```
         avg = statistics.median(grades)
         ```
@@ -123,7 +118,7 @@ You need to do the following:
         ```
         picked: Mode
         ```
-        then calculate the mean by using the command:
+        then calculate the mode by using the command:
         ```
         avg = statistics.mode(grades)
         ```
@@ -147,7 +142,7 @@ You need to do the following:
   1. remove the `pass` keyword and instead:
   2. get a string input from the user, using the prompt `"Pick '1' for print average, or '2' for plot average: "`.
   3. if the user input `"1"`, you should simply call the provided function **print_list_and_average** with the call `print_list_and_average(average)`. This will take care of printing the message (placeholders in use):\
-    ```The average <[list printed here]> is <average>```\
+    ```The average of <[list printed here]> is <average>```\
     see the examples shown below.
   4. if the user input `"2"`, you should simply call the provided function **plot_grades** with the call: `plot_grades(average)`.
   5. Otherwise, print an error message with: `"Error in pick_visualization: incorrect option picked"` and follow that with the statement `exit()`.
@@ -198,7 +193,7 @@ The End
 
 ### C: Correct input, avg: mode, normal printout
 
-Example: if the inputs the user gives are `6`, `6`, `7`, `8`, and `10`, then the `grades` list should contain `[6, 6, 7, 8, 10]`; If then, the user selects option `"c"`, then the average should be `7`; If then, the user selects option `"1"`, the complete Console information shown would be this:
+Example: if the inputs the user gives are `6`, `6`, `7`, `8`, and `10`, then the `grades` list should contain `[6, 6, 7, 8, 10]`; If then, the user selects option `"c"`, then the average should be `6`; If then, the user selects option `"1"`, the complete Console information shown would be this:
 
 ```
 Give me the next grade in [0 to 10]:6
@@ -216,7 +211,7 @@ The End
 
 ### D: Correct input, avg: mean, fancy printout
 
-Example: if the inputs the user gives are `6`, `6`, `7`, `8`, and `10`, then the `grades` list should contain `[6, 6, 7, 8, 10]`; If then, the user selects option `"a"`, then the average should be `7`; If then, the user selects option `"2"`, the complete Console information shown would be this:
+Example: if the inputs the user gives are `6`, `6`, `7`, `8`, and `10`, then the `grades` list should contain `[6, 6, 7, 8, 10]`; If then, the user selects option `"a"`, then the average should be `7.4`; If then, the user selects option `"2"`, the complete Console information shown would be this:
 
 ```
 Give me the next grade in [0 to 10]:6
@@ -258,7 +253,7 @@ Note that the parentheses are an annotation that marks which grade is the median
 
 ### F: Correct input, avg: mode, fancy printout
 
-Example: if the inputs the user gives are `6`, `6`, `7`, `8`, and `10`, then the `grades` list should contain `[6, 6, 7, 8, 10]`; If then, the user selects option `"c"`, then the average should be `7`; If then, the user selects option `"2"`, the complete Console information shown would be this:
+Example: if the inputs the user gives are `6`, `6`, `7`, `8`, and `10`, then the `grades` list should contain `[6, 6, 7, 8, 10]`; If then, the user selects option `"c"`, then the average should be `6`; If then, the user selects option `"2"`, the complete Console information shown would be this:
 
 ```
 Give me the next grade in [0 to 10]:6
@@ -286,9 +281,7 @@ Example: if the inputs the user gives are `6`, and `pizza`, then an error is det
 Give me the next grade in [0 to 10]:6
 Give me the next grade in [0 to 10]:pizza
 Error in read_five_ints: input string is not for an integer
-repl process died unexpectedly:
 ```
-Note that the message "repl process died unexpectedly:" is particular to replit when the exit function is used.
 
 ### H: Incorrect number entry (second number is not in [0,10])
 
@@ -298,9 +291,7 @@ Example: if the inputs the user gives are `6`, and `17`, then an error is detect
 Give me the next grade in [0 to 10]:6
 Give me the next grade in [0 to 10]:17
 Error in read_five_ints: input integer outside of range
-repl process died unexpectedly:
 ```
-Note that the message "repl process died unexpectedly:" is particular to replit when the exit function is used.
 
 ### I: Incorrect average option
 
@@ -315,9 +306,7 @@ Give me the next grade in [0 to 10]:10
 Sorted grades: [6, 6, 7, 8, 10]
 Pick 'a' for mean, 'b' for median, 'c' for mode: d
 Error in pick_averaging_method: incorrect option picked
-repl process died unexpectedly:
 ```
-Note that the message "repl process died unexpectedly:" is particular to replit when the exit function is used.
 
 ### J: Incorrect visualization option
 
@@ -334,9 +323,7 @@ Pick 'a' for mean, 'b' for median, 'c' for mode: a
 picked: Mean
 Pick '1' for print average, or '2' for plot average: 3
 Error in pick_visualization: incorrect option picked
-repl process died unexpectedly:
 ```
-Note that the message "repl process died unexpectedly:" is particular to replit when the exit function is used.
 
 
 # Grading
@@ -347,13 +334,13 @@ The submission:
 
 * runs without syntax errors (or -50%)
 * adds a few small but informative comments (or -5%)
-* adds a DocString to each function (or -5%)
+* keeps the docstring in each of the three functions you implement (or -5%)
 
 ### Operations
 
 The program:
 
-  * Passes all 14 tests (or lose ~7% per missed test).
+  * Passes all tests. The test component is graded by the percentage of tests passed, with the deductions above applied separately.
 
 Note: before submitting, you should check all the boxes that you actually completed like this:
 
@@ -364,11 +351,11 @@ The submission (check boxes after you complete each step):
   - [ ] you added your name to the top comments of the python file
   - [ ] runs without syntax errors (or -50%)
   - [ ] adds a few small but informative comments (or -5%)
-  - [ ] adds docstrings to each function (or -5%)
+  - [ ] keeps docstrings in the three functions you implement (or -5%)
   - [ ] Passes all tests (or lose points per missed test). If you do not pass all tests, do not check this box
   - [ ] You checked the correct boxes
 
 
 ## Submitting
 
-Submit to your GitHub repositories before the due date/time.
+Submit to Gradescope before the due date/time.
